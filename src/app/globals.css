@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui;
+  --font-body: "Inter", ui-sans-serif, system-ui;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular;
+}
+
+html,
+body {
+  background: #05060a;
+  color: #e7e8ee;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 124, 243, 0.35) transparent;
+}
+
+/*
+  Global "Motion" toggle (see components/layout/SiteHeader + hooks/useMotion).
+  When the user turns motion off — or the OS has prefers-reduced-motion — we
+  freeze every CSS animation/transition in place instead of removing it, so
+  layout never jumps.
+*/
+html[data-motion="off"] * {
+  animation-play-state: paused !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Thin animated caret used by the typewriter tagline */
+.type-caret::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: caret-blink 1s steps(2, start) infinite;
+}
+
+@keyframes caret-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Card surface reused across the hero panel */
+.glass-panel {
+  background: linear-gradient(180deg, rgba(15, 17, 26, 0.86), rgba(9, 10, 16, 0.86));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+/* Custom range input (used by the music player + volume) */
+input[type="range"].scrub {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+input[type="range"].scrub::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: #c6bdfb;
+  box-shadow: 0 0 8px rgba(198, 189, 251, 0.8);
+  cursor: pointer;
+}
+input[type="range"].scrub::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border: none;
+  border-radius: 999px;
+  background: #c6bdfb;
+  cursor: pointer;
+}
